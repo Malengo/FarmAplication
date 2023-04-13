@@ -16,8 +16,13 @@ class CowController extends AbstractController
     #[Route('/', name: 'app_cow_index', methods: ['GET'])]
     public function index(CowRepository $cowRepository): Response
     {
+        $cows = $cowRepository->findAll();
+        $new = array_map( function ($cow) {
+            return $cow = $cow->setAbate($cow);
+        }, $cows);
+       
         return $this->render('cow/index.html.twig', [
-            'cows' => $cowRepository->findAll(),
+            'cows' => $new,
         ]);
     }
 
@@ -29,6 +34,7 @@ class CowController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $cow = $cow->setAbate($cow);
             $cowRepository->save($cow, true);
 
             return $this->redirectToRoute('app_cow_index', [], Response::HTTP_SEE_OTHER);
@@ -75,4 +81,5 @@ class CowController extends AbstractController
 
         return $this->redirectToRoute('app_cow_index', [], Response::HTTP_SEE_OTHER);
     }
+
 }

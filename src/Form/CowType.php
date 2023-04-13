@@ -15,9 +15,7 @@ class CowType extends AbstractType
             ->add('weight')
             ->add('milkAmount')
             ->add('foodAmount')
-            ->add('born')
-            ->add('isAlive')
-        ;
+            ->add('born');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\CowRepository;
+use DateTime;
 use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -30,7 +31,10 @@ class Cow
     private ?\DateTimeInterface $born = null;
 
     #[ORM\Column]
-    private ?bool $isAlive = null;
+    private ?bool $isAlive = true;
+
+    #[ORM\Column]
+    private ?bool $isAbate = false;
 
     public function getId(): ?int
     {
@@ -96,4 +100,35 @@ class Cow
 
         return $this;
     }
+
+    public function isIsAbate(): ?bool
+    {
+        return $this->isAbate;
+    }
+
+    public function setIsAbate(bool $isAbate): self
+    {
+        $this->isAbate = $isAbate;
+
+        return $this;
+    }
+
+    public function setAbate(Cow $cow): Cow {
+
+        $difference = $cow->getBorn()->diff(new DateTime())->y;
+        $arroba = $cow->getWeight() / 15;
+        $cow->setIsAbate(false);
+        
+        if($difference >= 5) {
+            $cow->setIsAbate(true);
+        } else if ($cow->getMilkAmount() < 40) {
+            $cow->setIsAbate(true);
+        } else if ( $cow->getMilkAmount() < 70 && $cow->getFoodAmount() > 50) {
+            $cow->setIsAbate(true);
+        } else if ($arroba > 18) {
+            $cow->setIsAbate(true);
+        } 
+
+        return $cow;
+    } 
 }

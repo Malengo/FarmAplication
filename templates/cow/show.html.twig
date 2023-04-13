@@ -12,23 +12,23 @@
                 <td>{{ cow.id }}</td>
             </tr>
             <tr>
-                <th>Weight</th>
+                <th>Peso</th>
                 <td>{{ cow.weight }}</td>
             </tr>
             <tr>
-                <th>MilkAmount</th>
+                <th>Quantidade de Leite produzido por Semana</th>
                 <td>{{ cow.milkAmount }}</td>
             </tr>
             <tr>
-                <th>FoodAmount</th>
+                <th>Quantidade de comida ingerida por Semana 	</th>
                 <td>{{ cow.foodAmount }}</td>
             </tr>
             <tr>
-                <th>Born</th>
+                <th>Data de Nascimento</th>
                 <td>{{ cow.born ? cow.born|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
-                <th>IsAlive</th>
+                <th>Foi Abatido</th>
                 <td>{{ cow.isAlive ? 'Yes' : 'No' }}</td>
             </tr>
         </tbody>
