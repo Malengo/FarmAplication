@@ -3,8 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\CowRepository;
+use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CowRepository::class)]
 class Cow
@@ -24,6 +26,7 @@ class Cow
     private ?float $foodAmount = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\LessThan(value: new DateTimeImmutable(), message:"O nascimento não pode ser uma data Futura")]
     private ?\DateTimeInterface $born = null;
 
     #[ORM\Column]
