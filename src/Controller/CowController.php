@@ -34,7 +34,6 @@ class CowController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $cow = $cow->setAbate($cow);
             $cowRepository->save($cow, true);
 
             return $this->redirectToRoute('app_cow_index', [], Response::HTTP_SEE_OTHER);

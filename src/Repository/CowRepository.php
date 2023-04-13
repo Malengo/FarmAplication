@@ -23,6 +23,7 @@ class CowRepository extends ServiceEntityRepository
 
     public function save(Cow $entity, bool $flush = false): void
     {
+        $entity = $entity->setAbate($entity);
         $this->getEntityManager()->persist($entity);
 
         if ($flush) {
