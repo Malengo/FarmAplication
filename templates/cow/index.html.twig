@@ -3,18 +3,18 @@
 {% block title %}Cow index{% endblock %}
 
 {% block body %}
-    <h1>Cow index</h1>
+    <h1>Lista de Bois </h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Weight</th>
-                <th>MilkAmount</th>
-                <th>FoodAmount</th>
-                <th>Born</th>
-                <th>IsAlive</th>
-                <th>actions</th>
+                <th>Peso</th>
+                <th>Quantidade de Leite produzido por Semana</th>
+                <th>Quantidade de comida ingerida por Semana</th>
+                <th>Data de Nascimento</th>
+                <th>Pronto pro Abate</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -24,20 +24,20 @@
                 <td>{{ cow.weight }}</td>
                 <td>{{ cow.milkAmount }}</td>
                 <td>{{ cow.foodAmount }}</td>
-                <td>{{ cow.born ? cow.born|date('Y-m-d') : '' }}</td>
-                <td>{{ cow.isAlive ? 'Yes' : 'No' }}</td>
+                <td>{{ cow.born ? cow.born|date('d-m-Y') : '' }}</td>
+                <td>{{ cow.isAlive ? 'Sim' : 'Não' }}</td>
                 <td>
-                    <a href="{{ path('app_cow_show', {'id': cow.id}) }}">show</a>
-                    <a href="{{ path('app_cow_edit', {'id': cow.id}) }}">edit</a>
+                    <a href="{{ path('app_cow_show', {'id': cow.id}) }}">Mostar Informações</a>
+                    <a href="{{ path('app_cow_edit', {'id': cow.id}) }}">Editar</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">no records found</td>
+                <td colspan="7">Não existe bois na Fazenda</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_cow_new') }}">Create new</a>
+    <a href="{{ path('app_cow_new') }}">Cadastrar novos bois</a>
 {% endblock %}
