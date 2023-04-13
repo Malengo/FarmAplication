@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Cow{% endblock %}
+
+{% block body %}
+    <h1>Edit Cow</h1>
+
+    {{ include('cow/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_cow_index') }}">back to list</a>
+
+    {{ include('cow/_delete_form.html.twig') }}
+{% endblock %}

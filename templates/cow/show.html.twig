@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cow{% endblock %}
+
+{% block body %}
+    <h1>Cow</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ cow.id }}</td>
+            </tr>
+            <tr>
+                <th>Weight</th>
+                <td>{{ cow.weight }}</td>
+            </tr>
+            <tr>
+                <th>MilkAmount</th>
+                <td>{{ cow.milkAmount }}</td>
+            </tr>
+            <tr>
+                <th>FoodAmount</th>
+                <td>{{ cow.foodAmount }}</td>
+            </tr>
+            <tr>
+                <th>Born</th>
+                <td>{{ cow.born ? cow.born|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>IsAlive</th>
+                <td>{{ cow.isAlive ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_cow_index') }}">back to list</a>
+
+    <a href="{{ path('app_cow_edit', {'id': cow.id}) }}">edit</a>
+
+    {{ include('cow/_delete_form.html.twig') }}
+{% endblock %}
