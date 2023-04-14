@@ -44,18 +44,27 @@ class CowRepository extends ServiceEntityRepository
         $abate = $this->getEntityManager()->createQuery(
             'SELECT cow
             FROM App\Entity\Cow cow
-            WHERE cow.isAbate = true'
+            WHERE cow.isAbate = true AND cow.isAlive = true'
         );
         return $abate->getResult();
     }
 
-    public function findByAlive(): array {
-        $abate = $this->getEntityManager()->createQuery(
+    public function findByisNotAlive(): array {
+        $alive = $this->getEntityManager()->createQuery(
             'SELECT cow
             FROM App\Entity\Cow cow
             WHERE cow.isAlive = false'
         );
-        return $abate->getResult();
+        return $alive->getResult();
+    }
+
+    public function findByisAlive(): array {
+        $alive = $this->getEntityManager()->createQuery(
+            'SELECT cow
+            FROM App\Entity\Cow cow
+            WHERE cow.isAlive = true'
+        );
+        return $alive->getResult();
     }
 
 //    /**
