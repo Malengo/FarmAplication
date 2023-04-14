@@ -1,11 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Cow{% endblock %}
+{% block title %}Cadastro{% endblock %}
 
 {% block body %}
-    <h1>Create new Cow</h1>
+    <h1>Cadastrar Novo Boi</h1>
 
     {{ include('cow/_form.html.twig') }}
-
-    <a href="{{ path('app_cow_index') }}">Lista de Bois</a>
 {% endblock %}
