@@ -3,7 +3,7 @@
 {% block title %}Cow index{% endblock %}
 
 {% block body %}
-    <h1>Lista de Bois </h1>
+    <h1>Lista de Bois para Abate</h1>
 
     <table class="table">
         <thead>
@@ -29,7 +29,7 @@
                 <td>{{ cow.isAlive ? 'Sim' : 'Não' }}</td>
                 <td>{{ cow.isAbate ? 'Sim' : 'Não' }}</td>
                 <td>
-                    <a href="{{ path('app_cow_edit', {'id': cow.id}) }}">Editar</a>
+                    <a href="{{ path('app_cow_edit_abate', {'id': cow.id}) }}">Abater</a>
                 </td>
             </tr>
         {% else %}

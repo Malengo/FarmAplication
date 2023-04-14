@@ -95,6 +95,13 @@ class CowController extends AbstractController
         ]);
     }
 
+    #[Route('/{id}/edit/abate', name: 'app_cow_edit_abate')]
+    public function abateCow(Cow $cow, CowRepository $cowRepository): Response {
+        $cow->setIsAlive(false);
+        $cowRepository->save($cow, true);
+        return $this->redirectToRoute('app_cow_index', [], Response::HTTP_SEE_OTHER);
+    }
+
     #[Route('/{id}', name: 'app_cow_delete', methods: ['POST'])]
     public function delete(Request $request, Cow $cow, CowRepository $cowRepository): Response
     {
