@@ -23,6 +23,7 @@ class CowRepository extends ServiceEntityRepository
 
     public function save(Cow $entity, bool $flush = false): void
     {
+        $entity = $entity->setAbate($entity);
         $this->getEntityManager()->persist($entity);
 
         if ($flush) {
@@ -37,6 +38,33 @@ class CowRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function findByAbate(): array {
+        $abate = $this->getEntityManager()->createQuery(
+            'SELECT cow
+            FROM App\Entity\Cow cow
+            WHERE cow.isAbate = true AND cow.isAlive = true'
+        );
+        return $abate->getResult();
+    }
+
+    public function findByisNotAlive(): array {
+        $alive = $this->getEntityManager()->createQuery(
+            'SELECT cow
+            FROM App\Entity\Cow cow
+            WHERE cow.isAlive = false'
+        );
+        return $alive->getResult();
+    }
+
+    public function findByisAlive(): array {
+        $alive = $this->getEntityManager()->createQuery(
+            'SELECT cow
+            FROM App\Entity\Cow cow
+            WHERE cow.isAlive = true'
+        );
+        return $alive->getResult();
     }
 
 //    /**

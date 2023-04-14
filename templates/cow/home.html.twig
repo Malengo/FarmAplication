@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cow index{% endblock %}
+
+{% block body %}
+    <h1>Home</h1>
+    <div class="row">
+        <div class="col-md-4 col-xl-3">
+            <div class="card alert alert-primary border border-dark" role="alert">
+                <div class="card-block">
+                    <h6 class="fw-bold">Total de leite produzido por semana</h6>
+                    <h2 class="text-right"><i class="fa fa-cart-plus f-left"></i><span>{{ milk }}</span></h2>
+                    <p class="m-b-0">Quantidade de Bois: <span class="f-right">{{ total }}</span></p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 col-xl-3">
+            <div  class="alert alert-secondary border border-dark" role="alert">
+                <div class="card-block text-wrap">
+                    <h6 class="fw-bold">Total de Ração Utilizada por semana</h6>
+                    <h2 class="text-left"><i class="fa fa-rocket f-rigth"></i><span>{{ food }}</span></h2>
+                    <p class="m-b-0">Quantidade de Bois: <span class="f-right">{{ total }}</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+<h4>Lista de Bois com até 1 ano e comem 500kg de Ração</h4>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr class="table-dark">
+                <th>Id</th>
+                <th>Peso</th>
+                <th>Quantidade de Leite produzido por Semana</th>
+                <th>Quantidade de comida ingerida por Semana</th>
+                <th>Data de Nascimento</th>
+                <th>Pronto pro Abate</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cow in cows %}
+            <tr>
+                <td>{{ cow.id }}</td>
+                <td>{{ cow.weight }}</td>
+                <td>{{ cow.milkAmount }}</td>
+                <td>{{ cow.foodAmount }}</td>
+                <td>{{ cow.born ? cow.born|date('d-m-Y') : '' }}</td>
+                <td>{{ cow.isAbate ? 'Sim' : 'Não' }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">Não existe bois</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
