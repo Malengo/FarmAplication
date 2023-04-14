@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cow index{% endblock %}
+
+{% block body %}
+    <h1>Lista de Bois Abatidos</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Peso</th>
+                <th>Quantidade de Leite produzido por Semana</th>
+                <th>Quantidade de comida ingerida por Semana</th>
+                <th>Data de Nascimento</th>
+                <th>Vivo</th>
+                <th>Pronto pro Abate</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cow in cows %}
+            <tr>
+                <td>{{ cow.id }}</td>
+                <td>{{ cow.weight }}</td>
+                <td>{{ cow.milkAmount }}</td>
+                <td>{{ cow.foodAmount }}</td>
+                <td>{{ cow.born ? cow.born|date('d-m-Y') : '' }}</td>
+                <td>{{ cow.isAlive ? 'Sim' : 'Não' }}</td>
+                <td>{{ cow.isAbate ? 'Sim' : 'Não' }}</td>
+                <td>
+                    <a href="{{ path('app_cow_edit', {'id': cow.id}) }}">Editar</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">Não existe para Abate</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_cow_index') }}">Lista de Bois</a>
+{% endblock %}
