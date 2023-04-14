@@ -17,7 +17,6 @@
                 <th>Data de Nascimento</th>
                 <th>Vivo</th>
                 <th>Pronto pro Abate</th>
-                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -30,10 +29,6 @@
                 <td>{{ cow.born ? cow.born|date('d-m-Y') : '' }}</td>
                 <td>{{ cow.isAlive ? 'Sim' : 'Não' }}</td>
                 <td>{{ cow.isAbate ? 'Sim' : 'Não' }}</td>
-                <td>
-                    <a href="{{ path('app_cow_show', {'id': cow.id}) }}">Mostar Informações</a>
-                    <a href="{{ path('app_cow_edit', {'id': cow.id}) }}">Editar</a>
-                </td>
             </tr>
         {% else %}
             <tr>
@@ -43,7 +38,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_cow_new') }}">Cadastrar novos bois</a>
-    <a href="{{ path('app_cow_list') }}">Lista de Bois para Abater</a>
-    <a href="{{ path('app_cow_dead_list') }}">Lista de Bois Abatidos</a>
+    <a href="{{ path('app_cow_index') }}">Lista de todos os Bois</a>
 {% endblock %}
