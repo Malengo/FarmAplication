@@ -30,18 +30,6 @@ class CowController extends AbstractController
         ]);
     }
 
-    #[Route('/list', name: 'app_cow_list', methods: ['GET'])]
-    public function abateList(CowRepository $cowRepository): Response {
-        $cows = $cowRepository->findByAbate();
-        return $this->render('cow/listAbate.html.twig', ['cows' => $cows]);
-    }
-
-    #[Route('/list/dead', name: 'app_cow_dead_list', methods: ['GET'])]
-    public function deadCowList(CowRepository $cowRepository): Response {
-        $cows = $cowRepository->findByAlive();
-        return $this->render('cow/deadlistAbate.html.twig', ['cows' => $cows]);
-    }
-
     #[Route('/new', name: 'app_cow_new', methods: ['GET', 'POST'])]
     public function new(Request $request, CowRepository $cowRepository): Response
     {
@@ -87,13 +75,6 @@ class CowController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit/abate', name: 'app_cow_edit_abate')]
-    public function abateCow(Cow $cow, CowRepository $cowRepository): Response {
-        $cow->setIsAlive(false);
-        $cowRepository->save($cow, true);
-        return $this->redirectToRoute('app_cow_index', [], Response::HTTP_SEE_OTHER);
-    }
-
     #[Route('/{id}', name: 'app_cow_delete', methods: ['POST'])]
     public function delete(Request $request, Cow $cow, CowRepository $cowRepository): Response
     {
@@ -102,6 +83,25 @@ class CowController extends AbstractController
         }
 
         return $this->redirectToRoute('app_cow_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/edit/abate', name: 'app_cow_edit_abate')]
+    public function abateCow(Cow $cow, CowRepository $cowRepository): Response {
+        $cow->setIsAlive(false);
+        $cowRepository->save($cow, true);
+        return $this->redirectToRoute('app_cow_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/list', name: 'app_cow_list', methods: ['GET'])]
+    public function abateList(CowRepository $cowRepository): Response {
+        $cows = $cowRepository->findByAbate();
+        return $this->render('cow/listAbate.html.twig', ['cows' => $cows]);
+    }
+
+    #[Route('/list/dead', name: 'app_cow_dead_list', methods: ['GET'])]
+    public function deadCowList(CowRepository $cowRepository): Response {
+        $cows = $cowRepository->findByAlive();
+        return $this->render('cow/deadlistAbate.html.twig', ['cows' => $cows]);
     }
 
 }
