@@ -40,6 +40,24 @@ class CowRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByAbate(): array {
+        $abate = $this->getEntityManager()->createQuery(
+            'SELECT cow
+            FROM App\Entity\Cow cow
+            WHERE cow.isAbate = true'
+        );
+        return $abate->getResult();
+    }
+
+    public function findByAlive(): array {
+        $abate = $this->getEntityManager()->createQuery(
+            'SELECT cow
+            FROM App\Entity\Cow cow
+            WHERE cow.isAlive = false'
+        );
+        return $abate->getResult();
+    }
+
 //    /**
 //     * @return Cow[] Returns an array of Cow objects
 //     */
