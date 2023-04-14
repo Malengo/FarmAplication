@@ -131,4 +131,8 @@ class Cow
 
         return $cow;
     } 
+
+    public function getCowYear(): int {
+        return $this->getBorn()->diff(new DateTime())->y;
+    }
 }
