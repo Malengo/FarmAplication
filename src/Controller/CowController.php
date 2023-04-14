@@ -18,20 +18,22 @@ class CowController extends AbstractController
         $cows = $cowRepository->findByisAlive();
         $allFood = 0.0;
         $allMilk = 0.0;
-
+        $total = count($cows);
+        
         foreach($cows as $cow) {
             $allFood += $cow->getFoodAmount();
             $allMilk += $cow->getMilkAmount();
         }
 
         $cows = array_filter($cows, function($cow) {
-            return $cow->getCowYear() <= 1 && $cow->getFoodAmount() > 300;
+            return $cow->getCowYear() <= 1 && $cow->getFoodAmount() > 500;
         });
-
+        
         return $this->render('cow/home.html.twig', [
             'cows' => $cows,
             'milk' => $allMilk,
             'food' => $allFood,
+            'total' => $total,
         ]);
     }
 

@@ -12,10 +12,18 @@ class CowType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('weight')
-            ->add('milkAmount')
-            ->add('foodAmount')
-            ->add('born');
+            ->add('weight', null,[
+                'label' => 'Peso em kg',
+            ])
+            ->add('milkAmount', null,[
+                'label' => 'Quantidade de Leite produzido por semana',
+            ])
+            ->add('foodAmount', null,[
+                'label' => 'Quantidade de Comida por semana',
+            ])
+            ->add('born', null,[
+                'label' => 'Data de Nascimento',
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
