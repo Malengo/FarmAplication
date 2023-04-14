@@ -29,19 +29,16 @@
                 <td>{{ cow.isAlive ? 'Sim' : 'Não' }}</td>
                 <td>{{ cow.isAbate ? 'Sim' : 'Não' }}</td>
                 <td>
-                    <a href="{{ path('app_cow_show', {'id': cow.id}) }}">Mostar Informações</a>
                     <a href="{{ path('app_cow_edit', {'id': cow.id}) }}">Editar</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">Não existe bois na Fazenda</td>
+                <td colspan="7">Não existe para Abate</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_cow_new') }}">Cadastrar novos bois</a>
-    <a href="{{ path('app_cow_list') }}">Lista de Bois para Abater</a>
-    <a href="{{ path('app_cow_dead_list') }}">Lista de Bois Abatidos</a>
+    <a href="{{ path('app_cow_index') }}">Lista de Bois</a>
 {% endblock %}

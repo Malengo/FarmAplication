@@ -20,10 +20,34 @@ class CowController extends AbstractController
         $new = array_map( function ($cow) {
             return $cow = $cow->setAbate($cow);
         }, $cows);
+
+        foreach($new as $cow) {
+            $cowRepository->save($cow, true);
+        }
        
         return $this->render('cow/index.html.twig', [
             'cows' => $new,
         ]);
+    }
+
+    #[Route('/list', name: 'app_cow_list', methods: ['GET'])]
+    public function abateList(CowRepository $cowRepository): Response {
+        $cows = $cowRepository->findAll();
+        $abateList = array_filter($cows, function($cow) {
+            return $cow->isIsAbate() == true && $cow->isIsAlive() == true;
+        });
+
+        return $this->render('cow/listAbate.html.twig', ['cows' => $abateList]);
+    }
+
+    #[Route('/list/dead', name: 'app_cow_dead_list', methods: ['GET'])]
+    public function deadCowList(CowRepository $cowRepository): Response {
+        $cows = $cowRepository->findAll();
+        $abateList = array_filter($cows, function($cow) {
+            return $cow->isIsAlive() == false;
+        });
+
+        return $this->render('cow/deadlistAbate.html.twig', ['cows' => $abateList]);
     }
 
     #[Route('/new', name: 'app_cow_new', methods: ['GET', 'POST'])]
